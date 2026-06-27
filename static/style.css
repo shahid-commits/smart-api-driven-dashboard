@@ -1,0 +1,208 @@
+/* Smart API-Driven Dashboard — main stylesheet */
+
+/* removes default browser spacing so we start clean */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* base page styles — dark background, clean font */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f1117;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+/* centers all content and limits max width */
+.container {
+    max-width: 650px;
+    margin: 0 auto;   
+}
+
+/* page title area */
+.header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+/* main dashboard title */
+.header h1 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+/* small grey text below the title */
+.header .subtitle {
+    font-size: 13px;
+    color: #888;
+}
+
+/* red error box shown when city not found */
+.error-box {
+    background: #2d1515;
+    border: 1px solid #c0392b;
+    color: #e74c3c;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* main weather info card */
+.weather-card {
+    background: #1a1d2e;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #2a2d3e;
+}
+
+/* city and country name */
+.city-name {
+    font-size: 22px;
+    font-weight: 600px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+/* big temperature number */
+.temperature {
+    font-size: 64px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+/* hot/mild/cool/cold condition badge */
+.condition {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+/* each condition gets its own color */
+.hot { background: #2d1515; color: #e74c3c; }
+.mild { background: #1a2d1a; color: #2ecc71; }
+.cool { background: #1a1f2d; color: #3498db; }
+.cold { background: #1a1f2d; color: #74b9ff; }
+
+/* row that holds humidity and wind boxes */
+.stats {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+/* individual stat box */
+.stat-box {
+    background: #0f1117;
+    border-radius: 10px;
+    padding: 14px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 120px;
+}
+
+/* label above the stat value */
+.stat-label {
+    font-size: 12px;
+    color: #888;
+}
+
+/* the actual number */
+.stat-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* shared card style for both search and AI sections */
+.search-box,
+.ai-box {
+    background: #1a1d2e;
+    border-radius: 16px;
+    padding: 24 px;
+    margin-bottom: 20 px;
+    border: 1px solid #2a2d3e;
+}
+
+/* section headings */
+.search-box h2,
+.ai-box h2 {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 14px;
+}
+
+/* shared input field style used in both forms */
+.search-input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #2a2d3e;
+    background: #0f1117;
+    color: #e0e0e0;
+    font-size: 14px;
+    margin-bottom: 12px;
+    /* removes default browser outline on focus */
+    outline: none;
+}
+
+/* input glows blue when clicked */
+.search-input:focus {
+    border-color: #3498db;
+}
+
+/* shared base style for both buttons */
+.search-btn,
+.ask-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+/* slightly transparent on hover to show it's clickable */
+.search-btn:hover,
+.ask-btn:hover {
+    opacity: 0.85;
+}
+
+/* blue button for city search */
+.search-btn {
+    background: #3498db;
+    color: #ffffff;
+}
+
+/* purple button for AI question */
+.ask-btn {
+    background: #6c5ce7;
+    color: #ffffff;
+}
+
+/* box where the AI answer appears after JS gets response */
+.ai-answer {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #0f1117;
+    color: #2ecc71;
+    font-size: 14px;
+    line-height: 1.6;
+    /* hidden by default - JS makes it visible*/
+    display: none;
+}

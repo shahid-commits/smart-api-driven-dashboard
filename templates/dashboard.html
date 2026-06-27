@@ -1,0 +1,118 @@
+<!-- Smart API-Driven Dashboard — main template -->
+
+<!DOCTYPE html>         <!-- standard HTML5 document declaration -->
+<html lang="en">        <!-- en = page language is English -->
+<head>
+    <!-- enables special characters like °C to display correctly -->
+    <meta charset="UTF-8">
+
+    <!-- make the page look right on mobile screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Jinja2 fills {{ city }} with the real city name -->
+    <title>Weather Dashboard — {{ city }}</title>
+
+    <!-- loads our stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- main page wrapper — CSS will center this -->
+    <div class="container">
+
+        <!-- top header bar -->
+        <div class="header">
+            <h1>⛅ Weather Dashboard</h1>
+            <p class="subtitle">Live weather powered by Open-Meteo</p>
+        </div>
+        
+        <!-- show error message if weather fetch failed -->
+        {% if error %}
+            <div class="error-box">
+                ⚠️ {{ error }}
+            </div>
+        
+        <!-- show weather data if fetch succeeded-->
+        {% else %}
+            <div class="weather-card">
+                
+                <!-- city name and country -->
+                <div class="city-name">{{ city }}, {{ country }}</div>
+
+                <!-- big temperature display -->
+                <div class="temperature">{{ temperature }}°C</div>
+                
+                <!-- hot/ mild/ cold message based on temperature -->
+                {% if temperature > 30 %}
+                    <div class="condition hot">🔥 Hot — stay hyderated!</div>
+                {% elif temperature > 20 %}
+                    <div class="condition mild">😊 Pleasant weather today.</div>
+                {% elif temperature > 10 %}
+                    <div class="condition cool">🧥 Cool — light jacket recommended.</div>
+                {% else %}
+                    <div class="condition cold">🥶 Cold — dress up warm!</div>
+                {% endif %}
+
+                <!-- humidity and wind info -->
+                <div class="stats">
+                    <div class="stat-box">
+                        <span class="stat-label">💧 Humidity</span>
+                        <span class="stat-value">{{ humidity }}%</span>
+                    </div>
+
+                    <div class="stat-box">
+                        <span class="stat-label">💨 Wind</span>
+                        <span class="stat-value">{{ windspeed }} km/h</span>
+                    </div>
+                </div>
+
+            </div>
+        {% endif %}
+
+        <!-- city search form — submits as GET request to reload page with new city-->
+        <div class="search-box">
+            <h2>🔍 Search City</h2>
+
+            <!-- action="/" means it submits to our main dashboard route -->
+            <form action="/" method="get">
+
+                <!-- text input for city name -->
+                <input
+                    type="text"
+                    name="city"
+                    placerholder="Enter city name..."
+                    value="{{ city }}"
+                    class="search-input"
+                >
+
+                <!-- submit button triggers the GET request -->
+                <button type="submit" class="search-btn">Get Weather</button>
+            </form>
+        </div>
+
+        <!-- AI question form — submits to POST /ask via JavaScript -->
+        <div class="ai-box">
+            <h2>🤖 Ask AI About the Weather</h2>
+
+            <!-- placeholder shows example questions to the user -->
+            <input
+                type="text"
+                id="ai-question"
+                placeholder="e.g. Should I carry an umbrella today?"
+                class="search-input"
+            >
+
+            <!-- clicking this triggers the JS fetch call to POST /ask-->
+            <button onclick="askAI()" class="ask-btn">Ask AI</button>
+
+            <!-- AI answer appears here after JS gets the response -->
+            <div id="ai-answer" class="ai-answer"></div>
+        </div>
+
+    </div><!-- end container -->
+
+    <!-- JS at the bottom so HTML loads first -->
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
